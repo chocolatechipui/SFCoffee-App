@@ -1,0 +1,25 @@
+CACHE MANIFEST
+
+./index.html
+./chui/chui-3.8.1.js
+./chui/chui-android-3.8.1.css
+./chui/chui-ios-3.8.1.css
+./chui/chui-win-3.8.1.css
+
+./scripts/jquery-2.1.0.js
+
+./images/cups/1-small.png
+./images/cups/2-small.png
+./images/cups/3-small.png
+./images/cups/4-small.png
+./images/cups/5-small.png
+./images/cups/6-small.png
+./images/cups/7-small.png
+./images/cups/8-small.png
+./images/cups/9-small.png
+./images/cups/10-small.png
+
+./images/Link-icon.png
+./images/iOS7-App.png
+
+./data/coffee-shops.js

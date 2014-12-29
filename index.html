@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SFCOFFEE</title>
+	<link id='themeStylesheet' rel="stylesheet">
+	<script type="text/javascript" src="./js/jquery-2.1.0.js"></script>
+	<script type="text/javascript" src="./chui/chui-3.8.1.js"></script>
+	<script>
+		if ($.isWin) {
+			document.getElementById('themeStylesheet').setAttribute('href', './chui/chui-win-3.8.1.css');
+		} else if ($.isAndroid || $.isChrome) {
+			document.getElementById('themeStylesheet').setAttribute('href', './chui/chui-android-3.8.1.css');
+		} else if ($.isiOS || $.isSafari) {
+			document.getElementById('themeStylesheet').setAttribute('href', './chui/chui-ios-3.8.1.css');
+		} else {
+			document.getElementById('themeStylesheet').setAttribute('href', './chui/chui-win-3.8.1.css');
+		}
+	</script>
+	<script type="text/javascript" src="./data/coffee-shops.js"></script>
+	<script type="text/javascript" src="./js/app.js"></script>
+</head>
+<body>
+	<article id='main' class='current'>
+		<section>
+			<button id='exploreButton' class='explore'>Explore Places</button>
+		</section>
+	</article>
+	<nav class="next">
+		<button class="back">Home</button>
+		<h1>Coffee Shops</h1>
+		<button id='aboutThisApp'>About</button>
+	</nav>
+	<article id="blogs" class="next">
+		<section>
+			<ul id='blog-list' class="list">
+				<script id='listOfShops' type='text/x-template'>
+					<li class="comp" id="[[= data.id ]]" data-goto="detail">
+						<aside>
+							<img src="[[= data.image ]]" alt="[[= data.name ]]" width="100">
+						</aside>
+						<div>
+							<h3>[[= data.name ]]</h3>
+							<h4>[[= data.location ]]</h4>
+							<p>[[= data.description ]]</p>
+						</div>
+						<aside><span class="nav"></span></aside>
+					</li>
+				</script>
+			</ul>
+		</section>
+	</article>
+	<nav class="next">
+		<button class="back">Shops</button>
+		<h1>Coffee Shops</h1>
+	</nav>
+	<article id="detail" class="next">
+		<section>
+			<ul class="list" id="blogDetail">
+				<script id='shopDetail' type='text/x-template'>
+					<li>
+						<img src="[[= data.image ]]" alt="[[= data.name ]]"><br>
+						<a class="offsiteLink" href="[[= data.site ]]"></a>
+						<h3>[[= data.name ]] </h3>
+						<h4>[[= data.location ]]</h4>
+						<p>[[= data.content ]]</p>
+					</li>
+				</script>
+			</ul>
+		</section>
+	</article>
+	<script id='aboutThisAppTemplate' type='text/x-template'>
+		<div><button id='closeAboutSheet' class='action'>Close</button></div>
+		<img src='./images/coffee-brewing.jpg'>
+		<p>Everyone loves coffee, and geeks more so. This is a demonstration of using ChocolateChip-UI to create a Web app for mobile devices. Mmmm... Coffee and ChocolateChip sounds like a nice combination. When you hit this site on your mobile device, the app will detect which OS you have &mdash; iOS, Android, or Windows Phone 8 &mdash; and serve you the appropriate native-looking theme using ChocolateChip-UI.</p>
+	</script>
+</body>
+</html>
