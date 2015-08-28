@@ -9,9 +9,9 @@
 
 ChocolateChip-UI
 ChUI-Win.css
-Copyright 2014 Sourcebits www.sourcebits.com
+Copyright 2015 Sourcebits www.sourcebits.com
 License: MIT
-Version: 3.8.1
+Version: 3.9.1
 */
 /*
   To create a custom theme, adjust the color for @primaryColor. If you want a secondary color, say on the background of your lists, adjust the color of @listBkColor to the color you want.
@@ -27,6 +27,9 @@ Version: 3.8.1
   #flex > .align-content(flex-start | flex-end | center | space-between | space-around | stretch);
   #fkex > .flex(none | [ <flex-grow> <flex-shrink> | <flex-basis> ]);
 */
+.cloak > * {
+  display: none;
+}
 /* ==============================
    Body
    =========================== */
@@ -1335,8 +1338,6 @@ html[dir=rtl] .popup footer > button:first-of-type {
   opacity: .35;
 }
 .deletion-indicator {
-  display: -ms-flexbox;
-  display: flex;
   box-sizing: border-box;
   padding: 2px 5px 13px 1px;
   height: 24px;
@@ -1410,7 +1411,7 @@ li.selected > .deletion-indicator::before {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.button.delete {
+button.delete {
   float: right;
   color: #ffffff;
   text-align: center;
@@ -1437,13 +1438,13 @@ li.selected > .deletion-indicator::before {
   padding: 0;
   overflow: hidden;
 }
-.button.delete:hover {
+button.delete:hover {
   border-color: #ffffff !important;
 }
-.button.delete:hover::before {
+button.delete:hover::before {
   color: #ffffff;
 }
-.button.delete::before {
+button.delete::before {
   font-family: "Segoe UI Symbol";
   font-weight: normal;
   content: "\E107";
@@ -1455,7 +1456,7 @@ li.selected > .deletion-indicator::before {
   text-align: center;
   margin-top: 8px;
 }
-li.selected > .button.delete {
+li.selected > button.delete {
   transform: translate3d(0, 0, 0);
 }
 html[dir=rtl] .deletion-indicator {
@@ -1469,7 +1470,7 @@ html[dir=rtl] .list.showIndicators li {
   padding-left: 0;
   padding-right: 34px;
 }
-html[dir=rtl] .button.delete {
+html[dir=rtl] button.delete {
   float: left;
 }
 html[dir=rtl] .list.editable > li > .deletion-indicator,
@@ -1479,8 +1480,8 @@ html[dir=rtl] .list.deletable > li > .deletion-indicator {
   margin-left: -20px;
   right: -40px;
 }
-html[dir=rtl] .list.editable > li > .button.delete,
-html[dir=rtl] .list.deletable > li > .button.delete {
+html[dir=rtl] .list.editable > li > button.delete,
+html[dir=rtl] .list.deletable > li > button.delete {
   transform: translate3d(-80px, 0, 0);
   left: 0;
   right: auto;
@@ -1514,7 +1515,7 @@ html[dir=rtl] .list.showIndicators > li.selected {
   margin-right: 0;
   padding-left: 45px;
 }
-html[dir=rtl] .list.showIndicators > li.selected > .button.delete {
+html[dir=rtl] .list.showIndicators > li.selected > button.delete {
   transform: translate3d(6px, 0, 0);
 }
 /* ==============================
@@ -1761,16 +1762,16 @@ input[type="range"] {
 /* ==============================
    Slide Out
    =========================== */
-.slide-out {
+body.slide-out-app > .slide-out {
   position: absolute;
   top: 44pt;
-  left: 0;
+  right: 0;
   bottom: 0;
   background-color: #000000;
   z-index: 111111111;
-  width: 100%;
+  width: 90%;
   visibility: hidden;
-  transform: translate3d(-100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
   transition: all 0.25s ease-out;
   overflow-x: hidden;
   overflow-y: auto;
@@ -1783,33 +1784,37 @@ input[type="range"] {
   justify-content: flex-start;
   -ms-flex-align: stretch;
   align-items: stretch;
+  border-left: solid 1px rgba(255, 255, 255, 0.5);
+  box-shadow: -3px 0 8px rgba(255, 255, 255, 0.25);
 }
-.slide-out.open {
+body.slide-out-app > .slide-out.open {
   visibility: visible;
   transform: translate3d(0, 0, 0);
 }
-.slide-out > section {
+body.slide-out-app > .slide-out > section {
   -ms-flex: 1;
   flex: 1;
   padding-bottom: 100px;
   overflow-x: hidden;
   overflow-y: auto;
   -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-style: autohiding-scrollbar;
 }
-.slide-out > section > ul.list {
+body.slide-out-app > .slide-out > section > ul.list {
   margin-top: 20px;
 }
-button.slide-out-button {
+body.slide-out-app button.slide-out-button {
   position: absolute;
   z-index: 1111111;
-  top: 0 !important;
-  left: 15px;
+  top: 16px !important;
+  right: 15px !important;
+  left: auto !important;
   height: 35px;
   width: 35px;
   box-sizing: border-box;
-  margin-left: -5px !important;
+  margin-left: 20px !important;
 }
-button.slide-out-button::before {
+body.slide-out-app button.slide-out-button::before {
   content: '\E179';
   height: 35px;
   width: 35px;
@@ -1821,12 +1826,17 @@ button.slide-out-button::before {
   display: block;
   margin: 2px 0 0 -5px;
 }
-button.slide-out-button:hover::before {
+body.slide-out-app button.slide-out-button:hover::before {
   color: #000000;
 }
 body.slide-out-app > article,
 body.slide-out-app > nav:not(:first-of-type) {
-  display: none !important;
+  display: none;
+}
+body.slide-out-app > article.current,
+body.slide-out-app > nav:not(:first-of-type).current {
+  display: -ms-flexbox !important;
+  display: flex !important;
 }
 body.slide-out-app > article.show,
 body.slide-out-app > nav.show {
@@ -1841,16 +1851,23 @@ body.slide-out-app > nav.show {
   color: #ffffff !important;
   margin-top: 20px !important;
 }
-html[dir=rtl] .slide-out {
-  transform: translate3d(100%, 0, 0);
+html[dir=rtl] body.slide-out-app .slide-out {
+  transform: translate3d(-100%, 0, 0);
+  right: auto !important;
+  left: 0 !important;
+  border-left: none;
+  border-right: solid 1px rgba(255, 255, 255, 0.5);
+  box-shadow: 3px 0 8px rgba(255, 255, 255, 0.25);
 }
-html[dir=rtl] .slide-out.open {
+html[dir=rtl] body.slide-out-app .slide-out.open {
   transform: translate3d(0, 0, 0);
 }
-html[dir=rtl] button.slide-out-button {
+html[dir=rtl] body.slide-out-app button.slide-out-button {
   margin-right: 10px !important;
+  left: 0px !important;
+  right: auto !important;
 }
-html[dir=rtl] button.slide-out-button::before {
+html[dir=rtl] body.slide-out-app button.slide-out-button::before {
   margin: 2px -17px 0 0 !important;
 }
 /* ==============================
@@ -2353,15 +2370,15 @@ html[dir=rtl] .pagination > li:last-of-type {
 }
 .horizontal-scroll-panel {
   width: 100%;
-  height: 200px;
+  height: 240px;
   background-color: #ccc;
   padding: 20px;
-  overflow-x: hidden;
-  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   overflow-y: hidden !important;
-  overflow-x: auto;
+  overflow-x: scroll;
+  white-space: nowrap;
+  box-sizing: border-box;
 }
 .horizontal-scroll-panel > ul {
   list-style: none;
@@ -2369,6 +2386,7 @@ html[dir=rtl] .pagination > li:last-of-type {
   padding: 0;
   -webkit-padding-start: 0;
   font-size: 0;
+  width: 100%;
 }
 .horizontal-scroll-panel > ul li {
   display: inline-block;
@@ -2380,17 +2398,17 @@ html[dir=rtl] .pagination > li:last-of-type {
   margin-right: 20px;
   font-size: 0;
 }
-.horizontal-scroll-panel > ul:first-of-type {
+.horizontal-scroll-panel > ul li:first-of-type {
   margin-left: 0 !important;
 }
-.horizontal-scroll-panel > ul:last-of-type {
-  margin-right: 0 !important;
+.horizontal-scroll-panel > ul li:last-of-type {
+  margin-right: 20px !important;
 }
 body.isWindows .horizontal-scroll-panel {
   background-color: #333;
 }
 [dir=rtl] .horizontal-scroll-panel {
-  margin-right: -20px;
+  margin-right: 0;
   padding-right: 20px;
 }
 [dir=rtl] .horizontal-scroll-panel li {
@@ -2400,23 +2418,26 @@ body.isWindows .horizontal-scroll-panel {
 }
 [dir=rtl] .horizontal-scroll-panel li:first-of-type {
   margin-right: 0 !important;
+  margin-left: 20px !important;
 }
 [dir=rtl] .horizontal-scroll-panel li:last-of-type {
-  margin-left: 0 !important;
+  margin-left: 20px !important;
+  margin-right: 0 !important;
 }
 [dir=rtl] body.isWindows .horizontal-scroll-panel li {
   float: right;
 }
 @media only screen and (max-device-width: 480px) {
   .horizontal-scroll-panel {
-    height: 125px;
+    height: 125px !important;
     padding: 10px;
   }
   .horizontal-scroll-panel li {
-    height: 125px;
-    width: 125px;
+    height: 125px !important;
+    width: 125px !important;
   }
 }
+
 
 
 
@@ -2444,7 +2465,7 @@ button.explore {
    left: 50%;
    bottom: 100px;
    z-index: 1000;
-   background-color: rgba(0,0,0,.5) !important;
+   background-color: rgba(0,0,0,.8) !important;
    padding: 20px;
 }
 #global-nav {

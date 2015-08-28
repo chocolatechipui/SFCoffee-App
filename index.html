@@ -3,18 +3,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>SFCOFFEE</title>
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-tap-highlight" content="no">
 	<link id='themeStylesheet' rel="stylesheet">
 	<script type="text/javascript" src="./js/jquery-2.1.0.js"></script>
-	<script type="text/javascript" src="./chui/chui-3.8.1.js"></script>
+	<script type="text/javascript" src="./chui/chui-3.9.1.js"></script>
 	<script>
 		if ($.isWin) {
-			document.getElementById('themeStylesheet').setAttribute('href', './chui/chui-win-3.8.1.css');
+			document.getElementById('themeStylesheet').setAttribute('href', './chui/chui-win-3.9.1.css');
 		} else if ($.isAndroid || $.isChrome) {
-			document.getElementById('themeStylesheet').setAttribute('href', './chui/chui-android-3.8.1.css');
+			document.getElementById('themeStylesheet').setAttribute('href', './chui/chui-android-3.9.1.css');
 		} else if ($.isiOS || $.isSafari) {
-			document.getElementById('themeStylesheet').setAttribute('href', './chui/chui-ios-3.8.1.css');
+			document.getElementById('themeStylesheet').setAttribute('href', './chui/chui-ios-3.9.1.css');
 		} else {
-			document.getElementById('themeStylesheet').setAttribute('href', './chui/chui-win-3.8.1.css');
+			document.getElementById('themeStylesheet').setAttribute('href', './chui/chui-win-3.9.1.css');
 		}
 	</script>
 	<script type="text/javascript" src="./data/coffee-shops.js"></script>
@@ -33,11 +37,10 @@
 	</nav>
 	<article id="blogs" class="next">
 		<section>
-			<ul id='blog-list' class="list">
-				<script id='listOfShops' type='text/x-template'>
+			<ul id='blog-list' data-repeater='listOfShops' class="list cloak">
 					<li class="comp" id="[[= data.id ]]" data-goto="detail">
 						<aside>
-							<img src="[[= data.image ]]" alt="[[= data.name ]]" width="100">
+							<img data-src="[[= data.image ]]" alt="[[= data.name ]]" width="100">
 						</aside>
 						<div>
 							<h3>[[= data.name ]]</h3>
@@ -46,13 +49,12 @@
 						</div>
 						<aside><span class="nav"></span></aside>
 					</li>
-				</script>
 			</ul>
 		</section>
 	</article>
 	<nav class="next">
 		<button class="back">Shops</button>
-		<h1>Coffee Shops</h1>
+		<h1 id='chosenCoffeeShopName'>Coffee Shops</h1>
 	</nav>
 	<article id="detail" class="next">
 		<section>

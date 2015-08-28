@@ -1,40 +1,34 @@
 $(function() {
-
 	// Get templates:
-	var blogListTemplate = $('#listOfShops').html();
 	var blogDetailTemplate = $('#shopDetail').html();
 	var aboutThisAppTemplate = $('#aboutThisAppTemplate').html();
 
 	// Parse templates:
-	var blogListTmpl8 = $.template(blogListTemplate);
 	var blogDetailTmpl8 = $.template(blogDetailTemplate);
 
-
-	// Render list of coffee shps:
-	shops.forEach(function(ctx, idx) {
-		$('#blog-list').append(blogListTmpl8(ctx));
-	})
+  // Initialize repeater to output coffeeshops:
+  $.template.data['listOfShops'] = shops;
+  $.template.repeater();
 
 	// Event handler to get to list of shops:
 	$('#exploreButton').on('singletap', function() {
 		$.UIGoToArticle('#blogs');
 	});
 
-
-	// Get the id of tapped shop,
+	// Method to get the id of tapped shop,
 	// then render its detail view:
-	function getBlog(id) {
-		shops.forEach(function(ctx) {
-			if ( ctx.id === id ) {
-				$('#blogDetail').html(blogDetailTmpl8(ctx));
-			}
-		})
+	function getChoffeeshop(id) {
+		var chosenShop = shops.filter(function(item) {
+      return item.id === id;
+    });
+		$('#blogDetail').html(blogDetailTmpl8(chosenShop[0]));
+		$('#chosenCoffeeShopName').text(chosenShop[0].name)
 	}
 
-	// Event handler to see detail of coffee shop:
+	// Event handler to get detail of coffee shop:
 	$('#blog-list').on('singletap', 'li', function() {
 		var id = this.id;
-		getBlog(id);
+		getChoffeeshop(id);
 	});
 
 	// About this app:
@@ -46,5 +40,4 @@ $(function() {
 	$('#aboutThisAppSheet').find('button').on('singletap', function() {
 		$.UIHideSheet();
 	});
-
 });
